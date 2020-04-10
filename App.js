@@ -14,6 +14,7 @@ import SingUpScreen from './src/screens/SignUpScreen'
 import SingInScreen from './src/screens/SignInScreen'
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen'
 import {AuthProvider} from './src/hooks/authProvider'
+import {LocationProvider} from "./src/hooks/locationProvider"
 
 const switchNavigator = createSwitchNavigator({
   resolveAuth:ResolveAuthScreen,
@@ -34,7 +35,9 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator);
 
 export default () => {
- return <AuthProvider>
-    <App ref={(navigator) => {setNavigator(navigator)}}/>
-  </AuthProvider>
+ return <LocationProvider>
+    <AuthProvider>
+      <App ref={(navigator) => {setNavigator(navigator)}}/>
+    </AuthProvider>
+  </LocationProvider>
 }
