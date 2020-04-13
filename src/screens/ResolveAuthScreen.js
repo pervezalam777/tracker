@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet, View, Text} from 'react-native'
 import {withAuthContext} from '../hooks/authProvider'
 
 const ResolveAuthScreen = ({tryLocalSignIn}) =>  {
@@ -8,12 +8,12 @@ const ResolveAuthScreen = ({tryLocalSignIn}) =>  {
         tryLocalSignIn();
     }, [])
 
-    return <View style={style.container}>
+    return <View style={styles.container}>
        <Text>Loading...</Text>
     </View>
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent:"center",

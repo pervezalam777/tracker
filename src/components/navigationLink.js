@@ -2,11 +2,18 @@ import React from 'react'
 import {TouchableOpacity, Text, StyleSheet} from 'react-native'
 import {withNavigation} from 'react-navigation';
 
-const NavLink = ({label, navigateTo, navigation}) => (
-    <TouchableOpacity onPress={() => navigation.navigate(navigateTo)}>
+const NavLink = ({label, navigateTo, navigation}) => {
+    console.log("navigate To as: ", navigateTo)
+
+    return <TouchableOpacity onPress={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log("pressed....................", navigation.navigate)
+            navigation.navigate(navigateTo);
+        }}>
         <Text style={style.linkStyle}>{label}</Text>
     </TouchableOpacity>
-)
+}
 
 const style = StyleSheet.create({
     linkStyle: {

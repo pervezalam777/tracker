@@ -6,6 +6,7 @@ const ADD_CURRENT_LOCATION = "add_current_location";
 const START_RECORDING = "start_recording";
 const STOP_RECORDING = "stop_recording";
 const CHANGE_NAME = "change_name";
+const RESET = 'reset'
 
 const reducer = (state, {type, payload}) => {
     switch(type){
@@ -19,6 +20,8 @@ const reducer = (state, {type, payload}) => {
             return {...state, recording:false}
         case CHANGE_NAME:
             return {...state, name:payload}
+        case RESET:
+            return {recording:false, locations:[], currentLocation:null, name:''}
         default:
             return state
     }
@@ -43,6 +46,10 @@ const addLocation = dispatch => (location, recording) => {
     }
 }
 
+const resetLocation = dispatch => () => {
+    dispatch({type:RESET});
+}
+
 export const { 
     withContext:withLocationContext, 
     Provider:LocationProvider
@@ -58,7 +65,8 @@ export const {
         startRecording,
         stopRecording,
         addLocation,
-        changeName
+        changeName,
+        resetLocation
     }, 
     'locationState'
 );

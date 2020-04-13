@@ -2,9 +2,12 @@ import React from 'react';
 import {StyleSheet} from 'react-native'
 import {Input, Button} from 'react-native-elements'
 import {withLocationContext} from '../hooks/locationProvider'
+import { withTrackContext } from '../hooks/TrackContext';
 
 const TrackForm = ({
-    locationState:{recording, name},
+    locationState:{recording, name, locations},
+    createTrack,
+    resetLocation,
     startRecording, 
     stopRecording, 
     changeName
@@ -20,25 +23,39 @@ const TrackForm = ({
         <Input 
             autoCapitalize="none"
             autoCorrect={false}
-            style={styles.input}
+            style={styles.inputStyle}
             value={name}
             placeholder="Enter Track Name"
             onChangeText={changeName}
         />
         <Button 
             title={recording ? "Stop" : "Start Recording"}
+            buttonStyle={styles.button}
             onPress={onSubmit}
         />
+        {
+            (!recording && locations.length)
+            ? <Button
+                title="Save Recording"
+                onPress={() => createTrack(name, locations, resetLocation)}
+            />
+            : null
+        }
     </>
 }
 
 const styles = StyleSheet.create({
-    input: {
-        marginTop: 15,
-        marginBottom:15
+    inputStyle: {
+        marginTop: 25,
+        marginBottom:30
+    },
+    button: {
+        marginTop: 25,
+        marginBottom: 15
     }
 })
 
-const withLocationTrackForm = withLocationContext(TrackForm)
+const withTrackTrackForm = withTrackContext(TrackForm)
+const withLocationTrackForm = withLocationContext(withTrackTrackForm)
 
 export default withLocationTrackForm;

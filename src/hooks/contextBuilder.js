@@ -25,6 +25,6 @@ export default (reducer, initialState, actions, stateKey='state') => {
         }
     }
 
-    return [withContext, Provider]
+    return {withContext, Provider, Context}
 
 }

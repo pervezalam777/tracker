@@ -5,12 +5,8 @@ import AuthForm from '../components/AuthenticationForm'
 import NavigationLink from '../components/navigationLink';
 import { NavigationEvents } from 'react-navigation';
 
-const SingUpScreen = ({authState, signUp, clearAuthErrorMessage, tryLocalSignIn}) =>  {
-
-    useEffect(()=>{
-        tryLocalSignIn();
-    }, [])
-
+const SingUpScreen = ({authState, signUp, clearAuthErrorMessage}) =>  {
+    console.log("Sign Up screen")
     return <View style={style.container}>
         <NavigationEvents 
             onWillBlur={clearAuthErrorMessage}
@@ -40,7 +36,7 @@ const withAuthSignUpScreen = withAuthContext(SingUpScreen);
 
 withAuthSignUpScreen.navigationOptions = () => {
     return {
-        header: null
+        headerShown: false
     }
 }
 

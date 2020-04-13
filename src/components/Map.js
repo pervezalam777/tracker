@@ -5,10 +5,10 @@ import {withLocationContext} from '../hooks/locationProvider'
 
 
 const Map = ({locationState}) => {
-    let {currentLocation} = locationState
+    let {currentLocation, locations} = locationState
     
     if(!currentLocation){
-        return <ActivityIndicator size="large" style={{marginTop200}} />;
+        return <ActivityIndicator size="large" style={{marginTop:200}} />;
     }
 
     let regionObject = {
@@ -28,13 +28,14 @@ const Map = ({locationState}) => {
             strokeColor="rgba(158,158,255, 1.0)"
             fillColor="rgba(158,158,255,0.3)"
         />
-        {/* <Polyline  coordinates={points}/> */}
+        <Polyline  coordinates={locations.map(loc => loc.coords)}/>
     </MapView>
 }
 
 const styles = StyleSheet.create({
     map: {
-        height:300
+        height:300,
+        marginBottom:20
     }
 })
 

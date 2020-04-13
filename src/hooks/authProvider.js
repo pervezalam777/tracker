@@ -31,13 +31,16 @@ const reducer = (state, {type, payload}) => {
 const signUp = dispatch => async (email, password) => {
     try {
         const response = await tracker.post('/signup', {email, password})
+        console.log("Sign up response: ",response.data);
+
         const token = response.data.token
         await AsyncStorage.setItem("token", token);
         dispatch({type:SIGN_UP, payload:token})
         navigate('TrackList');
     } catch (error) {
         //error.response.data
-        dispatch({type:ADD_ERROR, payload:error.response.data.message});
+        console.log("error on Sign Up: ", error);
+        //dispatch({type:ADD_ERROR, payload:error.response.data.message});
     }
 }
 
@@ -49,7 +52,8 @@ const signIn = dispatch => async (email, password) => {
         dispatch({type:SIGN_IN, payload:token})
         navigate('TrackList');
     } catch (err) {
-        dispatch({type:ADD_ERROR, payload:error.response.data.message});
+        console.log("sign in error", err)
+        //dispatch({type:ADD_ERROR, payload:err.response.data.message});
     }
 }
 

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {StyleSheet, View} from 'react-native'
 import {NavigationEvents} from 'react-navigation'
 import {withAuthContext} from '../hooks/authProvider'
 import AuthForm from '../components/AuthenticationForm'
 import NavigationLink from '../components/navigationLink';
 
-const SingInScreen = ({authState, signIn, clearAuthErrorMessage}) =>  {
-
+const SingInScreen = ({authState, signIn, clearAuthErrorMessage, tryLocalSignIn}) =>  {
+    console.log('Sign In screen')
+    useEffect(()=>{
+        tryLocalSignIn();
+    }, [])
     return <View style={style.container}>
         <NavigationEvents 
             onWillBlur={clearAuthErrorMessage}
@@ -36,7 +39,7 @@ const withAuthSignInScreen = withAuthContext(SingInScreen);
 
 withAuthSignInScreen.navigationOptions = () => {
     return {
-        header: null
+        headerShown: false
     }
 }
 
